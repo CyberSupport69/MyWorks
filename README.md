@@ -1,2 +1,2 @@
 # MyWorks
-Repo for show my works
+This repository is designed to showcase my work.
