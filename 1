@@ -1,0 +1,139 @@
+
+#-Нарисовать ромб w раз
+def romb():
+    n = int(input("Vvod: "))
+    for i in range (-n+1,n):
+        for j in range (-n+1,n):
+            if abs(j)+1 >= n-abs(i):
+                print(chr(1024+(n-abs(j))), end=" ")
+            else:
+                print(" ", end=" ")
+        print("")        
+#-Нарисовать строки с увеличивающимся кол-вом символов
+def stroki():
+    n = int(input("Vvod: "))
+    for i in range(1, n+1):
+            for j in range(1, i+1):
+                print(chr(j+64)+chr(j+96), end=" ")
+            print("")
+#-Loading
+def loading():
+    p = 0
+    print("Start",end="")
+    print("[",end="")
+    while True:
+        p += 1
+        print("#",end="")
+        p += 2
+        print("#",end="")
+        p += 3
+        print("#",end="")
+        p = p ** 611
+        print("#",end="")
+        p = p ** 116
+        print("#",end="")
+        p = p ** 11
+        print("#",end="")
+        p = p ** 3
+        print("#",end="")
+        p = p ** 4
+        print("#",end="")
+        p += 1
+        if p > 0:
+            break
+    print("]")
+    print("End")
+#-sorter
+def sorter():
+    U = 0
+    slovar = []
+    lengt = int(input("Кол - во строк: "))
+    while True:
+        word = input("Vvod: ")
+        slovar.append(word)
+        U += 1
+        if U == lengt:
+            break
+    #-sorted
+    sorter = sorted(slovar)
+    sorter_length = sorted(slovar, key=len)        
+    #-print
+    print("From:")
+    print(slovar)
+    print("To:")
+    print(sorter)
+    print("Or:")
+    print(sorter_length)
+#-testing
+def test_all():
+    q = 'q'
+    while True:
+        menu = {1:'get request',q:'quit'}
+        for item_t in menu:
+            print("> " + str(item_t) + " - " + menu[item_t])
+        us = input("Vvod: ")
+        if us == '1':
+            menu_request = {1:'http://www.',2:'https://www.'}
+            for item_r in menu_request:
+                print("> " + str(item_r) + " - " + menu_request[item_r])
+            us_r = input("Vvod: ")
+            if us_r == '1':
+                htt = 'http://www.'
+            elif us_r == '2':
+                htt = 'https://www.'
+            else:
+                print("Неверный ввод")
+                break
+            url = input("Vvod URL: ")
+            response = requests.get(htt + url)
+            print("Result: " + str(response.status_code))
+            try:
+                assert response.status_code == 200
+                print("OK")
+                response_info_u = input("Info about request? y - yes, n - no  ")
+                if response_info_u == 'y':
+                    print("Headers:")
+                    print(response.headers)
+                    print("Content:")
+                    print(response.content)
+                    print("JSON")
+                    print(response.json)
+                if response_info_u == 'n':
+                    pass
+            except:
+                print("Error") 
+            
+        if us == 'q':
+            break
+
+#-menu
+def menu():
+    q = 'q'
+    menu = {0:"\_MENU_/",1:'romb',2:'stroki',3:'loading',4:'sorter',5:'test',q:'quit'}
+    for item in menu:
+        if item == 0:
+            print(menu[item].center(10))
+        if item != 0:
+            print("> " + str(item) + " - ", end="")
+            print(menu[item])
+#-MAIN
+def main():
+    while True:
+        menu()
+        us = input(" Enter: ")
+        if us == '1':
+            romb()
+        elif us == '2':
+            stroki()
+        elif us == '3':
+            loading()
+        elif us == '4':
+            sorter()
+        elif us == '5':
+            test_all()
+        elif us == 'q':
+            break
+        else:
+            print("Данного пункта меню нет")
+
+main()
